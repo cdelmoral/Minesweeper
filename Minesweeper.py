@@ -35,7 +35,7 @@ class Board(object):
 
 			if self.mines[col][row] == MINE:
 				mine_found = True
-				self.user_board[col][row] = MINE_FOUND
+				self.copy_mines_to_user_board()
 				break
 			else:
 				self.discover_cell(col, row)
@@ -47,7 +47,6 @@ class Board(object):
 			print "BOOOOM! You loose..."
 		else:
 			print "Phew! You are safe. You win!"
-
 
 	def initialize_mines(self):
 		self.mines = [[EMPTY for row in range(self.height)] for col in range(self.width)]
@@ -93,13 +92,12 @@ class Board(object):
 							self.discover_cell(col + i, row + j)
 
 	def print_board(self):
-
+		# print indexes of the board and upper border of the board
 		if self.width > 9:
 			print "\t  " + "   ".join([str(row + 1) for row in range(10)]),
 			print " " + "  ".join([str(row + 1) for row in range(10, self.width)]) + "\n"
 		else:
 			print "\t  " + "   ".join([str(row + 1) for row in range(self.width)]) + "\n"
-		# print indexes of the board and upper border of the board
 		print "\t|" + "".join([" - |" for row in range(self.width)])
 
 		# print row, separator between rows and bottom border of the board
@@ -109,6 +107,12 @@ class Board(object):
 
 		# print a blank line just for cleanliness
 		print
+
+	def copy_mines_to_user_board(self):
+		for col in range(self.width):
+			for row in range(self.height):
+				if self.mines[col][row] == MINE:
+					self.user_board[col][row] = MINE_FOUND
 
 	def clear_terminal(self):
 		for i in range(50):
