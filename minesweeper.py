@@ -15,8 +15,7 @@ class Board(object):
 			self.initialize_mines()
 			self.user_board = [[UNDISCOVERED for row in range(self.height)] for col in range(self.width)]
 		else:
-			""" Throw error """
-			pass
+			raise ValueError()
 
 	def play(self):
 		self.remaining_cells = self.height * self.width - self.num_mines
