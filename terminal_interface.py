@@ -23,4 +23,4 @@ while num_mines < 1 or num_mines > (height * width) - 1:
 		print "Read carefully..."
 
 board = ms.Board(height, width, num_mines)
-board.play()
+board.play_user()
